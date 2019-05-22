@@ -35,6 +35,13 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     
     TextureManager::Instance()->load("/Users/noah/Desktop/Big Trouble in Little Birthday/assets/Robin_Hero_forward_Idle.png", "animate", renderer);
     
+    //go, player & enemy are undefined pointers.
+    //you need to first do a :
+    //player = new Player();
+    //enemy = new Enemy();
+    //you probably don't need go as it is an abstract base class.
+    //also, Player and Enemy are abstract becaus they do not
+    //implement the clean() methos of their parent class GameObject
     m_gameObjects.push_back(go);
     m_gameObjects.push_back(player);
     m_gameObjects.push_back(enemy);
@@ -58,6 +65,9 @@ void Game::update()
 {
     for(std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++)
     {
+        //you getting here EXC_BAD_ACCESS (code=1, address=0x0)
+        //the address is null (0x0), that means your pointer
+        //(m_gameObjects[i]) is undefined. See my comment in init()
         m_gameObjects[i]->update();
     }
 }
